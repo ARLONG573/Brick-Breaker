@@ -1,3 +1,4 @@
+package ui;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -5,8 +6,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import ui.BrickBreakerFrame;
 
 /**
  * This class is a singleton options menu for the brick breaker game, where the

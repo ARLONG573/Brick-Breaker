@@ -1,3 +1,5 @@
+import ui.OptionsFrame;
+
 /**
  * Main class that starts the brick breaker application.
  * 
