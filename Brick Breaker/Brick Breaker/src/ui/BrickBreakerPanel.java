@@ -38,7 +38,8 @@ public class BrickBreakerPanel extends JPanel {
 	}
 
 	/**
-	 * Draws the current game state.
+	 * Draws the current game state. Calculations need to be done relative to the
+	 * size of the component that is returned from super.getParent().
 	 */
 	@Override
 	protected void paintComponent(final Graphics g) {
