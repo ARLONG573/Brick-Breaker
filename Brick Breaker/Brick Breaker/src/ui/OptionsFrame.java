@@ -61,6 +61,13 @@ public class OptionsFrame extends JFrame {
 	}
 
 	/**
+	 * @return The currently selected FPS.
+	 */
+	public int getFPS() {
+		return (Integer) this.fpsMenu.getSelectedItem();
+	}
+
+	/**
 	 * Makes sure that all of the options are initally set to their defaults.
 	 */
 	private void initComponents() {
@@ -74,10 +81,7 @@ public class OptionsFrame extends JFrame {
 	private void addListeners() {
 		this.startButton.addActionListener((e) -> {
 			super.setVisible(false);
-
-			final BrickBreakerFrame brickBreakerFrame = BrickBreakerFrame.getInstance();
-			brickBreakerFrame.setFPS((Integer) this.fpsMenu.getSelectedItem());
-			brickBreakerFrame.displayGame();
+			BrickBreakerFrame.getInstance().displayNewGame();
 		});
 	}
 }

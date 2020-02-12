@@ -16,7 +16,6 @@ public class BrickBreakerPanel extends JPanel {
 
 	private static BrickBreakerPanel instance;
 
-	// TODO state variables
 	private int fps = DEFAULT_FPS;
 
 	private BrickBreakerPanel() {
@@ -31,8 +30,12 @@ public class BrickBreakerPanel extends JPanel {
 		return instance;
 	}
 
-	public void setFPS(final int fps) {
-		this.fps = fps;
+	/**
+	 * Initializes the game state based on the selections made by the user in
+	 * OptionsFrame.
+	 */
+	public void initGameState() {
+		this.fps = OptionsFrame.getInstance().getFPS();
 	}
 
 	/**

@@ -37,19 +37,11 @@ public class BrickBreakerFrame extends JFrame {
 	}
 
 	/**
-	 * Sets the FPS of the game to the given FPS.
-	 * 
-	 * @param fps
-	 *            The FPS to set the game to.
+	 * Displays the BrickBreakerFrame after setting the initial game state based on
+	 * the selections made in OptionsFrame.
 	 */
-	public void setFPS(final int fps) {
-		this.brickBreakerPanel.setFPS(fps);
-	}
-
-	/**
-	 * Displays the BrickBreakerFrame.
-	 */
-	public void displayGame() {
+	public void displayNewGame() {
+		this.brickBreakerPanel.initGameState();
 		super.setVisible(true);
 	}
 }
