@@ -16,7 +16,7 @@ public class BrickBreakerPanel extends JPanel {
 
 	private static BrickBreakerPanel instance;
 
-	//TODO state variables
+	// TODO state variables
 	private int fps = DEFAULT_FPS;
 
 	private BrickBreakerPanel() {
