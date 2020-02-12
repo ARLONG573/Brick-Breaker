@@ -12,11 +12,10 @@ import javax.swing.JPanel;
 public class BrickBreakerPanel extends JPanel {
 
 	private static final long serialVersionUID = 4423585134456760646L;
-	private static final int DEFAULT_FPS = 60;
 
 	private static BrickBreakerPanel instance;
 
-	private int fps = DEFAULT_FPS;
+	private int fps;
 
 	private BrickBreakerPanel() {
 		// EMPTY
