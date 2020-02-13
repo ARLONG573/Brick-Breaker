@@ -65,6 +65,15 @@ public class BrickBreakerPanel extends JPanel {
 	@Override
 	protected void paintComponent(final Graphics g) {
 		super.paintComponent(g);
+		this.drawBricks(g);
+	}
+
+	/**
+	 * Draws the current state of the bricks.
+	 * 
+	 * @param g
+	 */
+	private void drawBricks(final Graphics g) {
 		for (final Brick brick : this.remainingBricks) {
 			brick.drawSelf(g);
 		}
