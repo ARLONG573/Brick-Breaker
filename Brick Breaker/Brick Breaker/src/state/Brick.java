@@ -3,6 +3,8 @@ package state;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import api.Drawable;
+
 /**
  * Each brick stores its game state by holding on to the position of its
  * top-left corner, its width, and its height. Each brick is also responsible
@@ -10,7 +12,7 @@ import java.awt.Graphics;
  * 
  * @author Aaron Tetens
  */
-public class Brick {
+public class Brick implements Drawable {
 
 	private final int x;
 	private final int y;
@@ -24,15 +26,11 @@ public class Brick {
 		this.height = height;
 	}
 
-	/**
-	 * Draws this brick (red with a black border).
-	 * 
-	 * @param g
-	 */
-	public void drawSelf(final Graphics g) {
+	@Override
+	public void draw(final Graphics g) {
 		g.setColor(Color.BLACK);
 		g.drawRect(this.x, this.y, this.width, this.height);
-		g.setColor(Color.RED);
+		g.setColor(Color.GREEN);
 		g.fillRect(this.x + 1, this.y + 1, this.width - 1, this.height - 1);
 	}
 }

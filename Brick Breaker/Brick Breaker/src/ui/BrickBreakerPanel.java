@@ -4,7 +4,9 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import state.Bar;
 import state.BrickSet;
+import state.DrawableSet;
 
 /**
  * This singleton panel is where game state is updated and drawn.
@@ -17,8 +19,8 @@ public class BrickBreakerPanel extends JPanel {
 
 	private static BrickBreakerPanel instance;
 
-	// Game state variables
-	private BrickSet remainingBricks;
+	private final DrawableSet drawables = new DrawableSet();
+
 	private int fps;
 
 	private BrickBreakerPanel() {
@@ -41,7 +43,16 @@ public class BrickBreakerPanel extends JPanel {
 	 */
 	public void initGameState() {
 		this.fps = OptionsFrame.getInstance().getFPS();
-		this.remainingBricks = new BrickSet();
+		this.initDrawableSet();
+	}
+
+	/**
+	 * Fills the DrawableSet with the game's initial conditions.
+	 */
+	private void initDrawableSet() {
+		this.drawables.clear();
+		this.drawables.add(new BrickSet());
+		this.drawables.add(new Bar());
 	}
 
 	/**
@@ -50,6 +61,6 @@ public class BrickBreakerPanel extends JPanel {
 	@Override
 	protected void paintComponent(final Graphics g) {
 		super.paintComponent(g);
-		this.remainingBricks.drawBricks(g);
+		this.drawables.draw(g);
 	}
 }

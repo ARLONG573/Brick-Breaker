@@ -3,13 +3,15 @@ package state;
 import java.awt.Graphics;
 import java.util.HashSet;
 
+import api.Drawable;
+
 /**
  * Extension of HashSet<Brick> that provides useful methods for dealing with the
  * bricks' state.
  * 
  * @author Aaron Tetens
  */
-public class BrickSet extends HashSet<Brick> {
+public class BrickSet extends HashSet<Brick> implements Drawable {
 
 	private static final long serialVersionUID = 5365999543111341615L;
 
@@ -24,14 +26,10 @@ public class BrickSet extends HashSet<Brick> {
 		}
 	}
 
-	/**
-	 * Draws all of the bricks in the set.
-	 * 
-	 * @param g
-	 */
-	public void drawBricks(final Graphics g) {
+	@Override
+	public void draw(final Graphics g) {
 		for (final Brick brick : this) {
-			brick.drawSelf(g);
+			brick.draw(g);
 		}
 	}
 }
