@@ -16,7 +16,7 @@ public class BrickSet extends HashSet<Brick> implements Drawable {
 	private static final long serialVersionUID = 5365999543111341615L;
 
 	/**
-	 * On initialization, BrickSet adds the set of initial bricks to itslef.
+	 * On initialization, BrickSet adds the set of initial bricks to itself.
 	 */
 	public BrickSet() {
 		for (int x = 2; x <= 572; x += 95) {
