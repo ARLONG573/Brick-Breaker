@@ -1,12 +1,10 @@
 package ui;
 
 import java.awt.Graphics;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.swing.JPanel;
 
-import state.Brick;
+import state.BrickSet;
 
 /**
  * This singleton panel is where game state is updated and drawn.
@@ -19,8 +17,8 @@ public class BrickBreakerPanel extends JPanel {
 
 	private static BrickBreakerPanel instance;
 
-	private final Set<Brick> remainingBricks = new HashSet<>();
-
+	// Game state variables
+	private BrickSet remainingBricks;
 	private int fps;
 
 	private BrickBreakerPanel() {
@@ -43,20 +41,7 @@ public class BrickBreakerPanel extends JPanel {
 	 */
 	public void initGameState() {
 		this.fps = OptionsFrame.getInstance().getFPS();
-		this.initBricks();
-	}
-
-	/**
-	 * Initializes the bricks for the game.
-	 */
-	private void initBricks() {
-		this.remainingBricks.clear();
-
-		for (int x = 2; x <= 572; x += 95) {
-			for (int y = 0; y <= 172; y += 43) {
-				this.remainingBricks.add(new Brick(x, y, 95, 43));
-			}
-		}
+		this.remainingBricks = new BrickSet();
 	}
 
 	/**
@@ -65,17 +50,6 @@ public class BrickBreakerPanel extends JPanel {
 	@Override
 	protected void paintComponent(final Graphics g) {
 		super.paintComponent(g);
-		this.drawBricks(g);
-	}
-
-	/**
-	 * Draws the current state of the bricks.
-	 * 
-	 * @param g
-	 */
-	private void drawBricks(final Graphics g) {
-		for (final Brick brick : this.remainingBricks) {
-			brick.drawSelf(g);
-		}
+		this.remainingBricks.drawBricks(g);
 	}
 }
