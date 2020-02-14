@@ -27,6 +27,9 @@ public class BrickBreakerPanel extends JPanel {
 		// EMPTY
 	}
 
+	/**
+	 * @return The singleton instance of BrickBreakerPanel.
+	 */
 	public static BrickBreakerPanel getInstance() {
 		if (instance == null) {
 			instance = new BrickBreakerPanel();
