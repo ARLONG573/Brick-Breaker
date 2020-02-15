@@ -21,7 +21,10 @@ public class BrickBreakerPanel extends JPanel {
 
 	private final DrawableSet drawables = new DrawableSet();
 
+	// Game state variables
 	private int fps;
+	private Bar bar;
+	private BrickSet brickSet;
 
 	private BrickBreakerPanel() {
 		// EMPTY
@@ -45,17 +48,26 @@ public class BrickBreakerPanel extends JPanel {
 	 * x 860.
 	 */
 	public void initGameState() {
-		this.fps = OptionsFrame.getInstance().getFPS();
+		this.initStateVariables();
 		this.initDrawableSet();
 	}
 
 	/**
-	 * Fills the DrawableSet with the game's initial conditions.
+	 * Sets the game state variables to their initial values.
+	 */
+	private void initStateVariables() {
+		this.fps = OptionsFrame.getInstance().getFPS();
+		this.bar = new Bar();
+		this.brickSet = new BrickSet();
+	}
+
+	/**
+	 * Initializes the set of drawable game state variables
 	 */
 	private void initDrawableSet() {
 		this.drawables.clear();
-		this.drawables.add(new BrickSet());
-		this.drawables.add(new Bar());
+		this.drawables.add(this.bar);
+		this.drawables.add(this.brickSet);
 	}
 
 	/**
