@@ -14,30 +14,46 @@ import api.Drawable;
  */
 public class Bar implements Drawable {
 
-	/**
-	 * These variables are final because the bar can only move, grow, and shrink in
-	 * the horizontal direction.
-	 */
-	private final int y;
-	private final int height;
+	// The bar only moves and changes size in the horizontal dirction, so these
+	// variables are final.
+	private static final int BAR_Y = 796;
+	private static final int BAR_HEIGHT = 21;
+
+	private static final int INIT_X = 274;
+	private static final int INIT_WIDTH = 120;
+
+	private static Bar instance;
 
 	private int x;
 	private int width;
 
+	private Bar() {
+		this.x = INIT_X;
+		this.width = INIT_WIDTH;
+	}
+
 	/**
-	 * No parameters here because the bar is drawn at the same spot at the start of
-	 * every game.
+	 * @return The singleton instance of Bar.
 	 */
-	public Bar() {
-		this.x = 274;
-		this.y = 796;
-		this.width = 120;
-		this.height = 21;
+	public static Bar getInstance() {
+		if (instance == null) {
+			instance = new Bar();
+		}
+
+		return instance;
+	}
+
+	/**
+	 * Resets the x-position and the width to their start-of-game defaults.
+	 */
+	public void initState() {
+		this.x = INIT_X;
+		this.width = INIT_WIDTH;
 	}
 
 	@Override
 	public void draw(final Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(this.x, this.y, this.width, this.height);
+		g.fillRect(this.x, BAR_Y, this.width, BAR_HEIGHT);
 	}
 }

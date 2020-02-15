@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import state.BallSet;
 import state.Bar;
 import state.BrickSet;
 import state.DrawableSet;
@@ -22,9 +23,10 @@ public class BrickBreakerPanel extends JPanel {
 	private final DrawableSet drawables = new DrawableSet();
 
 	// Game state variables
+	private final Bar bar = Bar.getInstance();
 	private int fps;
-	private Bar bar;
 	private BrickSet brickSet;
+	private BallSet ballSet;
 
 	private BrickBreakerPanel() {
 		// EMPTY
@@ -57,8 +59,9 @@ public class BrickBreakerPanel extends JPanel {
 	 */
 	private void initStateVariables() {
 		this.fps = OptionsFrame.getInstance().getFPS();
-		this.bar = new Bar();
+		this.bar.initState();
 		this.brickSet = new BrickSet();
+		this.ballSet = new BallSet();
 	}
 
 	/**
@@ -68,6 +71,7 @@ public class BrickBreakerPanel extends JPanel {
 		this.drawables.clear();
 		this.drawables.add(this.bar);
 		this.drawables.add(this.brickSet);
+		this.drawables.add(this.ballSet);
 	}
 
 	/**

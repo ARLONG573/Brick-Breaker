@@ -19,9 +19,9 @@ public class BrickSet extends HashSet<Brick> implements Drawable {
 	 * On initialization, BrickSet adds the set of initial bricks to itself.
 	 */
 	public BrickSet() {
-		for (int x = 2; x <= 572; x += 95) {
-			for (int y = 0; y <= 172; y += 43) {
-				super.add(new Brick(x, y, 95, 43));
+		for (int x = 2; x <= 572; x += Brick.BRICK_WIDTH) {
+			for (int y = 0; y <= 172; y += Brick.BRICK_HEIGHT) {
+				super.add(new Brick(x, y));
 			}
 		}
 	}

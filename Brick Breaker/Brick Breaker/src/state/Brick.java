@@ -14,23 +14,23 @@ import api.Drawable;
  */
 public class Brick implements Drawable {
 
+	// Every Brick instance has the same constant width and height.
+	static final int BRICK_WIDTH = 95;
+	static final int BRICK_HEIGHT = 43;
+
 	private final int x;
 	private final int y;
-	private final int width;
-	private final int height;
 
-	public Brick(final int x, final int y, final int width, final int height) {
+	public Brick(final int x, final int y) {
 		this.x = x;
 		this.y = y;
-		this.width = width;
-		this.height = height;
 	}
 
 	@Override
 	public void draw(final Graphics g) {
 		g.setColor(Color.BLACK);
-		g.drawRect(this.x, this.y, this.width, this.height);
+		g.drawRect(this.x, this.y, BRICK_WIDTH, BRICK_HEIGHT);
 		g.setColor(Color.GREEN);
-		g.fillRect(this.x + 1, this.y + 1, this.width - 1, this.height - 1);
+		g.fillRect(this.x + 1, this.y + 1, BRICK_WIDTH - 1, BRICK_HEIGHT - 1);
 	}
 }
