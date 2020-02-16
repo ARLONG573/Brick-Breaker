@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
@@ -27,6 +30,36 @@ public class BrickBreakerPanel extends JPanel {
 
 	private final DrawableSet drawables = new DrawableSet();
 
+	// If the user clicks and the game hasn't started, start the game
+	private final MouseAdapter clickListener = new MouseAdapter() {
+		@Override
+		public void mouseClicked(final MouseEvent e) {
+			if (!BrickBreakerPanel.this.gameStarted) {
+				BrickBreakerPanel.this.gameStarted = true;
+				// TODO launch the ball
+			}
+		}
+	};
+
+	// If the mouse moves after the game has started, move the bar
+	private final MouseMotionListener motionListener = new MouseMotionListener() {
+		@Override
+		public void mouseMoved(final MouseEvent e) {
+			this.handleMouseMovement();
+		}
+
+		@Override
+		public void mouseDragged(final MouseEvent e) {
+			this.handleMouseMovement();
+		}
+
+		private void handleMouseMovement() {
+			if (BrickBreakerPanel.this.gameStarted) {
+				// TODO move the bar
+			}
+		}
+	};
+
 	// Game state variables
 	private final Bar bar = Bar.getInstance();
 	private int fps;
@@ -35,7 +68,9 @@ public class BrickBreakerPanel extends JPanel {
 	private boolean gameStarted;
 
 	private BrickBreakerPanel() {
-		// EMPTY
+		super.addMouseListener(this.clickListener);
+		super.addMouseMotionListener(this.motionListener);
+		// TODO start game thread
 	}
 
 	/**
