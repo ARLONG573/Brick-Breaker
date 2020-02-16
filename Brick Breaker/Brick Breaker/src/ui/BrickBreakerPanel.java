@@ -1,5 +1,8 @@
 package ui;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -17,6 +20,8 @@ import state.DrawableSet;
 public class BrickBreakerPanel extends JPanel {
 
 	private static final long serialVersionUID = 4423585134456760646L;
+	private static final String START_GAME_TEXT = "CLICK ANYWHERE TO START";
+	private static final Font START_GAME_TEXT_FONT = new Font("Arial", Font.BOLD, 40);
 
 	private static BrickBreakerPanel instance;
 
@@ -27,6 +32,7 @@ public class BrickBreakerPanel extends JPanel {
 	private int fps;
 	private BrickSet brickSet;
 	private BallSet ballSet;
+	private boolean gameStarted;
 
 	private BrickBreakerPanel() {
 		// EMPTY
@@ -62,6 +68,7 @@ public class BrickBreakerPanel extends JPanel {
 		this.bar.initState();
 		this.brickSet = new BrickSet();
 		this.ballSet = new BallSet();
+		this.gameStarted = false;
 	}
 
 	/**
@@ -81,5 +88,25 @@ public class BrickBreakerPanel extends JPanel {
 	protected void paintComponent(final Graphics g) {
 		super.paintComponent(g);
 		this.drawables.draw(g);
+
+		if (!this.gameStarted) {
+			this.displayStartGameText(g);
+		}
+	}
+
+	/**
+	 * Displays "CLICK ANYWHERE TO START" on the screen.
+	 * 
+	 * @param g
+	 */
+	private void displayStartGameText(final Graphics g) {
+		g.setColor(Color.BLACK);
+		g.setFont(START_GAME_TEXT_FONT);
+
+		final FontMetrics metrics = g.getFontMetrics(START_GAME_TEXT_FONT);
+		final int textWidth = metrics.stringWidth(START_GAME_TEXT);
+		final int textHeight = metrics.getAscent();
+
+		g.drawString(START_GAME_TEXT, 334 - (textWidth / 2), 430 - (textHeight / 2));
 	}
 }
