@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import state.BallSet;
 import state.Bar;
@@ -20,7 +23,7 @@ import state.DrawableSet;
  * 
  * @author Aaron Tetens
  */
-public class BrickBreakerPanel extends JPanel {
+public class BrickBreakerPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 4423585134456760646L;
 	private static final String START_GAME_TEXT = "CLICK ANYWHERE TO START";
@@ -37,6 +40,7 @@ public class BrickBreakerPanel extends JPanel {
 			if (!BrickBreakerPanel.this.gameStarted) {
 				BrickBreakerPanel.this.gameStarted = true;
 				// TODO launch the ball
+				BrickBreakerPanel.this.initTimer();
 			}
 		}
 	};
@@ -60,17 +64,17 @@ public class BrickBreakerPanel extends JPanel {
 		}
 	};
 
-	// Game state variables
 	private final Bar bar = Bar.getInstance();
+
 	private int fps;
 	private BrickSet brickSet;
 	private BallSet ballSet;
 	private boolean gameStarted;
+	private Timer timer;
 
 	private BrickBreakerPanel() {
 		super.addMouseListener(this.clickListener);
 		super.addMouseMotionListener(this.motionListener);
-		// TODO start game thread
 	}
 
 	/**
@@ -114,6 +118,27 @@ public class BrickBreakerPanel extends JPanel {
 		this.drawables.add(this.bar);
 		this.drawables.add(this.brickSet);
 		this.drawables.add(this.ballSet);
+	}
+
+	/**
+	 * Reinitializes and starts the animation timer.
+	 */
+	private void initTimer() {
+		this.timer = new Timer(1000 / this.fps, this);
+		this.timer.start();
+	}
+
+	@Override
+	public void actionPerformed(final ActionEvent e) {
+		this.updateState();
+		super.repaint();
+	}
+
+	/**
+	 * Applies updates to all updatable objects.
+	 */
+	private void updateState() {
+		// TODO create the Updatable interface and use it to create an UpdatableSet
 	}
 
 	/**
