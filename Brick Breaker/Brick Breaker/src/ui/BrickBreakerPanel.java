@@ -17,6 +17,7 @@ import state.BallSet;
 import state.Bar;
 import state.BrickSet;
 import state.DrawableSet;
+import state.UpdatableSet;
 
 /**
  * This singleton panel is where game state is updated and drawn.
@@ -25,6 +26,13 @@ import state.DrawableSet;
  */
 public class BrickBreakerPanel extends JPanel implements ActionListener {
 
+	public static final int LEFT_WALL = 0;
+	public static final int BOTTOM_WALL = 860;
+	public static final int RIGHT_WALL = 669;
+	public static final int TOP_WALL = 0;
+	public static final int MID_X = RIGHT_WALL / 2;
+	public static final int MID_Y = BOTTOM_WALL / 2;
+
 	private static final long serialVersionUID = 4423585134456760646L;
 	private static final String START_GAME_TEXT = "CLICK ANYWHERE TO START";
 	private static final Font START_GAME_TEXT_FONT = new Font("Arial", Font.BOLD, 40);
@@ -32,6 +40,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	private static BrickBreakerPanel instance;
 
 	private final DrawableSet drawables = new DrawableSet();
+	private final UpdatableSet updatables = new UpdatableSet();
 
 	// If the user clicks and the game hasn't started, start the game
 	private final MouseAdapter clickListener = new MouseAdapter() {
@@ -39,7 +48,10 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		public void mouseClicked(final MouseEvent e) {
 			if (!BrickBreakerPanel.this.gameStarted) {
 				BrickBreakerPanel.this.gameStarted = true;
-				// TODO launch the ball
+
+				// TODO calculate initial launch based on click
+				BrickBreakerPanel.this.ballSet.launchFirstBall(10, -10);
+
 				BrickBreakerPanel.this.bar.moveToMouse(e.getX());
 				BrickBreakerPanel.this.initTimer();
 			}
@@ -98,6 +110,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	public void initGameState() {
 		this.initStateVariables();
 		this.initDrawableSet();
+		this.initUpdatableSet();
 	}
 
 	/**
@@ -122,6 +135,14 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	}
 
 	/**
+	 * Initializes the set of updatable game state variables
+	 */
+	private void initUpdatableSet() {
+		this.updatables.clear();
+		this.updatables.add(this.ballSet);
+	}
+
+	/**
 	 * Reinitializes and starts the animation timer.
 	 */
 	private void initTimer() {
@@ -139,7 +160,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	 * Applies updates to all updatable objects.
 	 */
 	private void updateState() {
-		// TODO create the Updatable interface and use it to create an UpdatableSet
+		this.updatables.update();
 	}
 
 	/**
@@ -168,6 +189,6 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		final int textWidth = metrics.stringWidth(START_GAME_TEXT);
 		final int textHeight = metrics.getAscent();
 
-		g.drawString(START_GAME_TEXT, 334 - (textWidth / 2), 430 - (textHeight / 2));
+		g.drawString(START_GAME_TEXT, MID_X - (textWidth / 2), MID_Y - (textHeight / 2));
 	}
 }

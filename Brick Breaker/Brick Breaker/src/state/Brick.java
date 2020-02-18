@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import api.Drawable;
+import ui.BrickBreakerPanel;
 
 /**
  * Each brick stores its game state by holding on to the position of its
@@ -15,8 +16,8 @@ import api.Drawable;
 public class Brick implements Drawable {
 
 	// Every Brick instance has the same constant width and height.
-	static final int BRICK_WIDTH = 95;
-	static final int BRICK_HEIGHT = 43;
+	static final int BRICK_WIDTH = BrickBreakerPanel.RIGHT_WALL / BrickSet.BRICKS_PER_ROW;
+	static final int BRICK_HEIGHT = BrickBreakerPanel.BOTTOM_WALL / 20;
 
 	private final int x;
 	private final int y;

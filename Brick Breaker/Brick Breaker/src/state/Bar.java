@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import api.Drawable;
+import ui.BrickBreakerPanel;
 
 /**
  * The bar stores its game state by holding on to the position of its top-left
@@ -16,11 +17,11 @@ public class Bar implements Drawable {
 
 	// The bar only moves and changes size in the horizontal dirction, so these
 	// variables are final.
-	private static final int BAR_Y = 796;
-	private static final int BAR_HEIGHT = 21;
+	static final int BAR_Y = BrickBreakerPanel.BOTTOM_WALL - ((int) (1.5 * Brick.BRICK_HEIGHT));
+	static final int BAR_HEIGHT = Brick.BRICK_HEIGHT / 2;
 
-	private static final int INIT_X = 274;
-	private static final int INIT_WIDTH = 120;
+	private static final int INIT_WIDTH = (int) (1.25 * Brick.BRICK_WIDTH);
+	private static final int INIT_X = BrickBreakerPanel.MID_X - (INIT_WIDTH / 2);
 
 	private static Bar instance;
 
@@ -28,7 +29,7 @@ public class Bar implements Drawable {
 	private int width;
 
 	private Bar() {
-		this.x = INIT_X;
+		this.setX(INIT_X);
 		this.width = INIT_WIDTH;
 	}
 
@@ -62,13 +63,21 @@ public class Bar implements Drawable {
 	public void moveToMouse(final int mouseX) {
 		final int desiredNewX = mouseX - (this.width / 2);
 
-		if (desiredNewX < 0) { // run into the left wall
-			this.x = 0;
-		} else if (desiredNewX > (669 - this.width)) { // run into the right wall
-			this.x = 669 - this.width;
-		} else { // all other cases
-			this.x = desiredNewX;
+		if (desiredNewX < BrickBreakerPanel.LEFT_WALL) { // run into the left wall
+			this.setX(BrickBreakerPanel.LEFT_WALL);
+		} else {
+			final int largestPossibleX = BrickBreakerPanel.RIGHT_WALL - this.width;
+
+			if (desiredNewX > largestPossibleX) { // run into the right wall
+				this.setX(largestPossibleX);
+			} else { // all other cases
+				this.setX(desiredNewX);
+			}
 		}
+	}
+
+	public void setX(final int x) {
+		this.x = x;
 	}
 
 	@Override
