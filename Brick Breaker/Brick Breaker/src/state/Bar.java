@@ -51,6 +51,26 @@ public class Bar implements Drawable {
 		this.width = INIT_WIDTH;
 	}
 
+	/**
+	 * Attempts to move the bar such that its center is vertically aligned with the
+	 * mouse. If this is not possible given the bar's width and current position,
+	 * get it as close as possible.
+	 * 
+	 * @param mouseX
+	 *            The x-coordinate of the mouse
+	 */
+	public void moveToMouse(final int mouseX) {
+		final int desiredNewX = mouseX - (this.width / 2);
+
+		if (desiredNewX < 0) { // run into the left wall
+			this.x = 0;
+		} else if (desiredNewX > (669 - this.width)) { // run into the right wall
+			this.x = 669 - this.width;
+		} else { // all other cases
+			this.x = desiredNewX;
+		}
+	}
+
 	@Override
 	public void draw(final Graphics g) {
 		g.setColor(Color.BLACK);

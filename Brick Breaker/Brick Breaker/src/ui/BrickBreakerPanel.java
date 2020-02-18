@@ -40,6 +40,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 			if (!BrickBreakerPanel.this.gameStarted) {
 				BrickBreakerPanel.this.gameStarted = true;
 				// TODO launch the ball
+				BrickBreakerPanel.this.bar.moveToMouse(e.getX());
 				BrickBreakerPanel.this.initTimer();
 			}
 		}
@@ -49,17 +50,17 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	private final MouseMotionListener motionListener = new MouseMotionListener() {
 		@Override
 		public void mouseMoved(final MouseEvent e) {
-			this.handleMouseMovement();
+			this.handleMouseMovement(e);
 		}
 
 		@Override
 		public void mouseDragged(final MouseEvent e) {
-			this.handleMouseMovement();
+			this.handleMouseMovement(e);
 		}
 
-		private void handleMouseMovement() {
+		private void handleMouseMovement(final MouseEvent e) {
 			if (BrickBreakerPanel.this.gameStarted) {
-				// TODO move the bar
+				BrickBreakerPanel.this.bar.moveToMouse(e.getX());
 			}
 		}
 	};
