@@ -88,15 +88,15 @@ public class Ball implements Drawable, Updatable {
 		this.setDy(dy);
 	}
 
-	public int getY() {
+	int getY() {
 		return this.y;
 	}
 
-	public void setDx(final int dx) {
+	private void setDx(final int dx) {
 		this.dx = dx;
 	}
 
-	public void setDy(final int dy) {
+	private void setDy(final int dy) {
 		this.dy = dy;
 	}
 
@@ -112,7 +112,7 @@ public class Ball implements Drawable, Updatable {
 	 * @return True if the magnitude of the ball's speed vector is equal to zero,
 	 *         false otherwise.
 	 */
-	public boolean isMoving() {
+	boolean isMoving() {
 		return !(this.dx == 0 && this.dy == 0);
 	}
 }

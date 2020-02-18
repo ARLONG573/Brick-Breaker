@@ -75,10 +75,5 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 		}
 
 		this.removeAll(lostBalls);
-
-		if (this.size() == 0) {
-			// TODO handle this situation
-			System.out.println("YOU LOSE");
-		}
 	}
 }

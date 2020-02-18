@@ -48,7 +48,7 @@ public class Bar implements Drawable {
 	 * Resets the x-position and the width to their start-of-game defaults.
 	 */
 	public void initState() {
-		this.x = INIT_X;
+		this.setX(INIT_X);
 		this.width = INIT_WIDTH;
 	}
 
