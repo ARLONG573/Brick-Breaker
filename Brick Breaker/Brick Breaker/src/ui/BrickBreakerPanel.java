@@ -161,6 +161,15 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	 */
 	private void updateState() {
 		this.updatables.update();
+
+		if (this.brickSet.isEmpty()) {
+			// TODO implement win protocol
+			System.out.println("YOU WIN");
+		}
+		if (this.ballSet.isEmpty()) {
+			// TODO implement lose protocol
+			System.out.println("YOU LOSE");
+		}
 	}
 
 	/**
