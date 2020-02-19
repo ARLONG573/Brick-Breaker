@@ -50,7 +50,9 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 				BrickBreakerPanel.this.gameStarted = true;
 
 				// TODO calculate initial launch based on click
-				BrickBreakerPanel.this.ballSet.launchFirstBall(10, -10);
+				// speed needs to be adjusted based on the fps
+				final int speedCoeff = OptionsFrame.MAX_FPS / BrickBreakerPanel.this.fps;
+				BrickBreakerPanel.this.ballSet.launchFirstBall(5 * speedCoeff, -5 * speedCoeff);
 
 				BrickBreakerPanel.this.bar.moveToMouse(e.getX());
 				BrickBreakerPanel.this.initTimer();

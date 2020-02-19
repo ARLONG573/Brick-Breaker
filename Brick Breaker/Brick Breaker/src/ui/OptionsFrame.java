@@ -18,8 +18,10 @@ import javax.swing.JPanel;
  */
 public class OptionsFrame extends JFrame {
 
+	static final int MAX_FPS = 120;
+
 	private static final long serialVersionUID = -5501116354649798614L;
-	private static final Integer[] FPS_CHOICES = { 30, 60 };
+	private static final Integer[] FPS_CHOICES = { 30, 60, 120 };
 
 	private static OptionsFrame instance;
 
@@ -71,7 +73,7 @@ public class OptionsFrame extends JFrame {
 	 * Makes sure that all of the options are initally set to their defaults.
 	 */
 	private void initComponents() {
-		this.fpsMenu.setSelectedItem(60);
+		this.fpsMenu.setSelectedItem(MAX_FPS);
 	}
 
 	/**
