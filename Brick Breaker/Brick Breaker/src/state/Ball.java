@@ -88,8 +88,104 @@ public class Ball implements Drawable, Updatable {
 		this.setDy(dy);
 	}
 
+	/**
+	 * Checks if the ball is in a position to bounce off the top of the bar; if it
+	 * is, negate its speed in the y direction.
+	 * 
+	 * The ball is in a position to bounce off of the top of the bar if its center
+	 * is between the left and right edge of the bar (horizontal requirement) and
+	 * the top edge of the bar is somewhere between the bottom and center of the
+	 * ball (vertical requirement).
+	 * 
+	 * @param bar
+	 *            The bar to check for a collision with
+	 */
+	void checkForBarCollision(final Bar bar) {
+		final int centerX = this.x + (BALL_WIDTH / 2);
+		final int centerY = this.y + (BALL_HEIGHT / 2);
+		final int barX = bar.getX();
+
+		final boolean xRequirement = this.valueLiesWithinRange(centerX, barX, barX + bar.getWidth());
+		final boolean yRequirement = this.valueLiesWithinRange(Bar.BAR_Y, centerY, this.y + BALL_HEIGHT);
+
+		if (xRequirement && yRequirement) {
+			this.setY(Bar.BAR_Y - BALL_HEIGHT);
+			this.setDy(-this.dy);
+		}
+	}
+
+	/**
+	 * Checks if the ball is in a position to bounce off of the given brick; if it
+	 * is, negate its speed in either the x or y direction (whichever is
+	 * appropriate).
+	 * 
+	 * @param brick
+	 *            The brick to check for a collision with
+	 * 
+	 * @return Whether or not the ball bounced off of the given brick.
+	 */
+	boolean checkForBrickCollision(final Brick brick) {
+		final int centerX = this.x + (BALL_WIDTH) / 2;
+		final int centerY = this.y + (BALL_HEIGHT) / 2;
+
+		final int brickLeft = brick.getX();
+		final int brickTop = brick.getY();
+		final int brickRight = brickLeft + Brick.BRICK_WIDTH;
+		final int brickBottom = brickTop + Brick.BRICK_HEIGHT;
+
+		boolean xRequirement;
+		boolean yRequirement;
+
+		boolean hit = false;
+		// check for collisions; note that a collision can occur on two sides at once
+		// bottom
+		xRequirement = this.valueLiesWithinRange(centerX, brickLeft, brickRight);
+		yRequirement = this.valueLiesWithinRange(brickBottom, this.y, centerY);
+		if (xRequirement && yRequirement) {
+			this.setY(brickBottom);
+			this.setDy(-this.dy);
+			hit = true;
+		}
+		// left
+		xRequirement = this.valueLiesWithinRange(brickLeft, centerX, this.x + BALL_WIDTH);
+		yRequirement = this.valueLiesWithinRange(centerY, brickTop, brickBottom);
+		if (xRequirement && yRequirement) {
+			this.setX(brickLeft - BALL_WIDTH);
+			this.setDx(-this.dx);
+			hit = true;
+		}
+		// right
+		xRequirement = this.valueLiesWithinRange(brickRight, this.x, centerX);
+		yRequirement = this.valueLiesWithinRange(centerY, brickTop, brickBottom);
+		if (xRequirement && yRequirement) {
+			this.setX(brickRight);
+			this.setDx(-this.dx);
+			hit = true;
+		}
+		// top
+		xRequirement = this.valueLiesWithinRange(centerX, brickLeft, brickRight);
+		yRequirement = this.valueLiesWithinRange(brickTop, centerY, this.y + BALL_HEIGHT);
+		if (xRequirement && yRequirement) {
+			this.setY(brickTop - BALL_HEIGHT);
+			this.setDy(-this.dy);
+			hit = true;
+		}
+
+		return hit;
+	}
+
 	int getY() {
 		return this.y;
+	}
+
+	/**
+	 * @param num
+	 * @param min
+	 * @param max
+	 * @return Whether or not num lies in the range [min,max]
+	 */
+	private boolean valueLiesWithinRange(final int num, final int min, final int max) {
+		return ((min <= num) && (num <= max));
 	}
 
 	private void setDx(final int dx) {

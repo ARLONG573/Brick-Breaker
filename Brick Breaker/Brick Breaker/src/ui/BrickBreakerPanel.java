@@ -52,7 +52,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 				// TODO calculate initial launch based on click
 				// speed needs to be adjusted based on the fps
 				final int speedCoeff = OptionsFrame.MAX_FPS / BrickBreakerPanel.this.fps;
-				BrickBreakerPanel.this.ballSet.launchFirstBall(5 * speedCoeff, -5 * speedCoeff);
+				BrickBreakerPanel.this.ballSet.launchFirstBall(10 * speedCoeff, -3 * speedCoeff);
 
 				BrickBreakerPanel.this.bar.moveToMouse(e.getX());
 				BrickBreakerPanel.this.initTimer();
@@ -167,11 +167,17 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		if (this.brickSet.isEmpty()) {
 			// TODO implement win protocol
 			System.out.println("YOU WIN");
+			this.timer.stop();
 		}
 		if (this.ballSet.isEmpty()) {
 			// TODO implement lose protocol
 			System.out.println("YOU LOSE");
+			this.timer.stop();
 		}
+
+		// the game is not over, check for anything that might change an object's state
+		this.ballSet.checkForBarCollisions(this.bar);
+		this.ballSet.checkForBrickCollisions(this.brickSet);
 	}
 
 	/**

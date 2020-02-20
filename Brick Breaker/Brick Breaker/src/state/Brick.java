@@ -27,6 +27,14 @@ public class Brick implements Drawable {
 		this.y = y;
 	}
 
+	int getX() {
+		return this.x;
+	}
+
+	int getY() {
+		return this.y;
+	}
+
 	@Override
 	public void draw(final Graphics g) {
 		g.setColor(Color.BLACK);

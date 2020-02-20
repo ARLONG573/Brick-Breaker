@@ -80,6 +80,14 @@ public class Bar implements Drawable {
 		this.x = x;
 	}
 
+	int getX() {
+		return this.x;
+	}
+
+	int getWidth() {
+		return this.width;
+	}
+
 	@Override
 	public void draw(final Graphics g) {
 		g.setColor(Color.BLACK);

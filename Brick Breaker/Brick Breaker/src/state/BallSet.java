@@ -63,9 +63,49 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 	}
 
 	/**
+	 * For each ball in the set, checks if that ball is in a position to bounce off
+	 * the top of the bar. If it is, negate its speed in the y direction.
+	 * 
+	 * @param bar
+	 *            The bar to check for collisions with
+	 */
+	public void checkForBarCollisions(final Bar bar) {
+		for (final Ball ball : this) {
+			ball.checkForBarCollision(bar);
+		}
+	}
+
+	/**
+	 * For each ball in the set, checks if that ball is in a position to bounce off
+	 * any of the bricks in the provided BrickSet; if it is, negate its speed in
+	 * either the x or y direction (whichever is appropriate) and remove the brick
+	 * from the game.
+	 * 
+	 * @param brickSet
+	 *            The set of bricks to check for collisions with
+	 */
+	public void checkForBrickCollisions(final BrickSet brickSet) {
+		// we don't use a BrickSet here because we don't want the initial bricks to be
+		// added to it
+		final Set<Brick> hitBricks = new HashSet<>();
+
+		for (final Ball ball : this) {
+			for (final Brick brick : brickSet) {
+				if (ball.checkForBrickCollision(brick)) {
+					hitBricks.add(brick);
+				}
+			}
+		}
+
+		brickSet.removeAll(hitBricks);
+	}
+
+	/**
 	 * Removes any balls that have gone off the bottom of the screen.
 	 */
 	private void removeLostBalls() {
+		// we don't use a BallSet here because we don't want the initial ball to be
+		// added to it
 		final Set<Ball> lostBalls = new HashSet<>();
 
 		for (final Ball ball : this) {
