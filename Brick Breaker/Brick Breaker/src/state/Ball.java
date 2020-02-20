@@ -125,8 +125,8 @@ public class Ball implements Drawable, Updatable {
 	 * @return Whether or not the ball bounced off of the given brick.
 	 */
 	boolean checkForBrickCollision(final Brick brick) {
-		final int centerX = this.x + (BALL_WIDTH) / 2;
-		final int centerY = this.y + (BALL_HEIGHT) / 2;
+		final int centerX = this.x + (BALL_WIDTH / 2);
+		final int centerY = this.y + (BALL_HEIGHT / 2);
 
 		final int brickLeft = brick.getX();
 		final int brickTop = brick.getY();
