@@ -103,8 +103,10 @@ public class Ball implements Drawable, Updatable {
 	void checkForBarCollision(final Bar bar) {
 		final int centerX = this.x + (BALL_WIDTH / 2);
 		final int centerY = this.y + (BALL_HEIGHT / 2);
-		final boolean xRequirement = ((bar.getX() <= centerX) && (centerX <= (bar.getX() + bar.getWidth())));
-		final boolean yRequirement = ((centerY <= Bar.BAR_Y) && (Bar.BAR_Y <= (this.y + BALL_HEIGHT)));
+		final int barX = bar.getX();
+
+		final boolean xRequirement = this.valueLiesWithinRange(centerX, barX, barX + bar.getWidth());
+		final boolean yRequirement = this.valueLiesWithinRange(Bar.BAR_Y, centerY, this.y + BALL_HEIGHT);
 
 		if (xRequirement && yRequirement) {
 			this.setY(Bar.BAR_Y - BALL_HEIGHT);
