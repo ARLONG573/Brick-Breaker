@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -80,6 +81,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	};
 
 	private final Bar bar = Bar.getInstance();
+	private final OptionsFrame optionsFrame = OptionsFrame.getInstance();
 
 	private int fps;
 	private BrickSet brickSet;
@@ -119,7 +121,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	 * Sets the game state variables to their initial values.
 	 */
 	private void initStateVariables() {
-		this.fps = OptionsFrame.getInstance().getFPS();
+		this.fps = this.optionsFrame.getFPS();
 		this.bar.initState();
 		this.brickSet = new BrickSet();
 		this.ballSet = new BallSet();
@@ -165,19 +167,28 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		this.updatables.update();
 
 		if (this.brickSet.isEmpty()) {
-			// TODO implement win protocol
-			System.out.println("YOU WIN");
-			this.timer.stop();
+			this.displayEndGameMessage("YOU WIN!");
 		}
 		if (this.ballSet.isEmpty()) {
-			// TODO implement lose protocol
-			System.out.println("YOU LOSE");
-			this.timer.stop();
+			this.displayEndGameMessage("YOU LOSE!");
 		}
 
 		// the game is not over, check for anything that might change an object's state
 		this.ballSet.checkForBarCollisions(this.bar);
 		this.ballSet.checkForBrickCollisions(this.brickSet);
+	}
+
+	/**
+	 * Stops the update loop and displays the given message to the user. After the
+	 * user confirms the message, they are brought back to the options menu.
+	 * 
+	 * @param message
+	 */
+	private void displayEndGameMessage(final String message) {
+		this.timer.stop();
+		JOptionPane.showMessageDialog(this, message);
+		this.optionsFrame.displayOptions();
+		BrickBreakerFrame.getInstance().setVisible(false);
 	}
 
 	/**
