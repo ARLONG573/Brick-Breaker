@@ -128,10 +128,10 @@ public class Ball implements Drawable, Updatable {
 		final int centerX = this.x + (BALL_WIDTH / 2);
 		final int centerY = this.y + (BALL_HEIGHT / 2);
 
-		final int brickLeft = brick.getX();
-		final int brickTop = brick.getY();
-		final int brickRight = brickLeft + Brick.BRICK_WIDTH;
-		final int brickBottom = brickTop + Brick.BRICK_HEIGHT;
+		final int brickLeft = brick.getLeft();
+		final int brickTop = brick.getTop();
+		final int brickRight = brick.getRight();
+		final int brickBottom = brick.getBottom();
 
 		boolean xRequirement;
 		boolean yRequirement;

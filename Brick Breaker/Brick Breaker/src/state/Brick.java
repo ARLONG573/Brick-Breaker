@@ -21,18 +21,37 @@ public class Brick implements Drawable {
 
 	private final int x;
 	private final int y;
+	
+	//collision bounds
+	private final int left;
+	private final int top;
+	private final int right;
+	private final int bottom;
 
 	public Brick(final int x, final int y) {
 		this.x = x;
 		this.y = y;
+		
+		this.left = this.x;
+		this.top = this.y;
+		this.right = this.left + BRICK_WIDTH;
+		this.bottom = this.top + BRICK_HEIGHT;
 	}
-
-	int getX() {
-		return this.x;
+	
+	int getLeft() {
+		return this.left;
 	}
-
-	int getY() {
-		return this.y;
+	
+	int getTop() {
+		return this.top;
+	}
+	
+	int getRight() {
+		return this.right;
+	}
+	
+	int getBottom() {
+		return this.bottom;
 	}
 
 	@Override
