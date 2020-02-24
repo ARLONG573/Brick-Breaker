@@ -189,11 +189,15 @@ public class Ball implements Drawable, Updatable {
 	 *            When setting the speed, dx and dy are multiplied by this number.
 	 */
 	void launchTowards(final int x, final int y, final int speedCoeff) {
-		final double theta = Math.atan(((double) (y - this.y)) / (x - this.x));
+		// we want the ball's center to pass through (x, y), not its top-left corner
+		// so, we do that adjustement before calculating the launch
+		final int destX = x - BALL_WIDTH;
+		final int destY = y - BALL_HEIGHT;
+		final double theta = Math.atan(((double) (destY - this.y)) / (destX - this.x));
 
 		// if we are launching to the left of the ball, we need to negate the result of
 		// arctan
-		final int signCoeff = x < this.x ? -1 : 1;
+		final int signCoeff = destX < this.x ? -1 : 1;
 		this.setSpeed((int) (signCoeff * speedCoeff * DEFAULT_SPEED * Math.cos(theta)),
 				(int) (signCoeff * speedCoeff * DEFAULT_SPEED * Math.sin(theta)));
 	}
