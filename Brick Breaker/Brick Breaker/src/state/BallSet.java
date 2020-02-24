@@ -27,12 +27,15 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 	/**
 	 * This method does nothing unless this BallSet consists of a single, non-moving
 	 * ball, indicating that the game has not started yet. If that is the case, then
-	 * the ball's speed is set to the given dx and dy values.
+	 * the ball's speed is set to the initial speed in the direction towards the
+	 * given point.
 	 * 
-	 * @param dx
-	 * @param dy
+	 * @param x
+	 * @param y
+	 * @param speedCoeff
+	 *            When setting the speed, dx and dy are multiplied by this number.
 	 */
-	public void launchFirstBall(final int dx, final int dy) {
+	public void launchFirstBall(final int x, final int y, final int speedCoeff) {
 		if (this.size() != 1) {
 			return;
 		}
@@ -42,8 +45,8 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 		if (ball.isMoving()) {
 			return;
 		}
-
-		ball.setSpeed(dx, dy);
+		
+		ball.launchTowards(x, y, speedCoeff);
 	}
 
 	@Override

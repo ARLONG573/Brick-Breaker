@@ -23,6 +23,7 @@ public class Ball implements Drawable, Updatable {
 
 	static final int MAX_Y = BrickBreakerPanel.BOTTOM_WALL - BALL_HEIGHT;
 	private static final int MAX_X = BrickBreakerPanel.RIGHT_WALL - BALL_WIDTH;
+	private static final int DEFAULT_SPEED = 10;
 
 	private int x;
 	private int y;
@@ -176,6 +177,25 @@ public class Ball implements Drawable, Updatable {
 
 	int getY() {
 		return this.y;
+	}
+
+	/**
+	 * The ball's speed is set to the initial speed multiplied by the given speed
+	 * coefficient in the direction towards the given point.
+	 * 
+	 * @param x
+	 * @param y
+	 * @param speedCoeff
+	 *            When setting the speed, dx and dy are multiplied by this number.
+	 */
+	void launchTowards(final int x, final int y, final int speedCoeff) {
+		final double theta = Math.atan(((double) (y - this.y)) / (x - this.x));
+
+		// if we are launching to the left of the ball, we need to negate the result of
+		// arctan
+		final int signCoeff = x < this.x ? -1 : 1;
+		this.setSpeed((int) (signCoeff * speedCoeff * DEFAULT_SPEED * Math.cos(theta)),
+				(int) (signCoeff * speedCoeff * DEFAULT_SPEED * Math.sin(theta)));
 	}
 
 	/**
