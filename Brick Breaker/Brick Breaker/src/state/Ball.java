@@ -18,12 +18,13 @@ import ui.BrickBreakerPanel;
 public class Ball implements Drawable, Updatable {
 
 	// The width and height of all balls are constant.
-	private static final int BALL_WIDTH = 30;
-	private static final int BALL_HEIGHT = 30;
+	public static final int BALL_WIDTH = 30;
+	public static final int BALL_HEIGHT = 30;
+	public static final int DEFAULT_SPEED = 10;
 
 	static final int MAX_Y = BrickBreakerPanel.BOTTOM_WALL - BALL_HEIGHT;
+	
 	private static final int MAX_X = BrickBreakerPanel.RIGHT_WALL - BALL_WIDTH;
-	private static final int DEFAULT_SPEED = 10;
 
 	private int x;
 	private int y;
