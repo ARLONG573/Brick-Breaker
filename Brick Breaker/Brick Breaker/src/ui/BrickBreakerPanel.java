@@ -52,9 +52,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 				
 				final int clickX = e.getX();
 				
-				// speed needs to be adjusted based on the fps
-				final int speedCoeff = OptionsFrame.MAX_FPS / BrickBreakerPanel.this.fps;
-				BrickBreakerPanel.this.ballSet.launchFirstBall(clickX, e.getY(), speedCoeff);
+				BrickBreakerPanel.this.ballSet.launchFirstBall(clickX, e.getY());
 
 				BrickBreakerPanel.this.bar.moveToMouse(clickX);
 				BrickBreakerPanel.this.initTimer();

@@ -32,10 +32,8 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 	 * 
 	 * @param x
 	 * @param y
-	 * @param speedCoeff
-	 *            When setting the speed, dx and dy are multiplied by this number.
 	 */
-	public void launchFirstBall(final int x, final int y, final int speedCoeff) {
+	public void launchFirstBall(final int x, final int y) {
 		if (this.size() != 1) {
 			return;
 		}
@@ -46,7 +44,7 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 			return;
 		}
 		
-		ball.launchTowards(x, y, speedCoeff);
+		ball.launchTowards(x, y);
 	}
 
 	@Override

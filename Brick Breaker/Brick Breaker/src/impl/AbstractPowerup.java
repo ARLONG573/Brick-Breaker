@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import api.Powerup;
 import state.Ball;
 import state.Bar;
+import ui.OptionsFrame;
 
 /**
  * This class is a convenient parent class for most implementations of the
@@ -19,7 +20,7 @@ public abstract class AbstractPowerup implements Powerup {
 	private static final int POWERUP_WIDTH = Ball.BALL_WIDTH;
 	private static final int POWERUP_HEIGHT = Ball.BALL_HEIGHT;
 
-	private static final int POWERUP_SPEED = -Ball.DEFAULT_SPEED;
+	private static final int POWERUP_SPEED = -Ball.DEFAULT_SPEED * OptionsFrame.getInstance().getSpeedCoefficient();
 
 	private int x;
 	private int y;

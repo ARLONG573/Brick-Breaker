@@ -70,6 +70,14 @@ public class OptionsFrame extends JFrame {
 	}
 
 	/**
+	 * Methods that set object's speeds multiply them by the value returned by this
+	 * method to account for FPS differences.
+	 */
+	public int getSpeedCoefficient() {
+		return MAX_FPS / this.getFPS();
+	}
+
+	/**
 	 * Makes sure that all of the options are initally set to their defaults.
 	 */
 	private void initComponents() {
