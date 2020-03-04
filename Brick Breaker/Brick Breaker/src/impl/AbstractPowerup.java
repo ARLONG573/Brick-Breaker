@@ -25,6 +25,10 @@ public abstract class AbstractPowerup implements Powerup {
 	private int x;
 	private int y;
 
+	protected AbstractPowerup() {
+		// left empty because never used, but must exist for compilation
+	}
+
 	/**
 	 * Creates a new AbstractPowerup centered at (x, y).
 	 * 

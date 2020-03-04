@@ -35,8 +35,20 @@ public class PowerupFactory {
 	 *         returned by getPowerupNames().
 	 */
 	public static Powerup createPowerup(final String name, final int x, final int y) {
-		// TODO implement the different powerups
-		return null;
+		switch (name) {
+		case "Multi-Ball":
+			return new MultiBallPowerup(x, y);
+		case "Speed Up":
+			return new SpeedupPowerup(x, y);
+		case "Speed Down":
+			return new SpeedDownPowerup(x, y);
+		case "Grow Bar":
+			return new GrowBarPowerup(x, y);
+		case "Shrink Bar":
+			return new ShrinkBarPowerup(x, y);
+		default:
+			return null;
+		}
 	}
 
 }
