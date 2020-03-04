@@ -104,7 +104,7 @@ public class OptionsFrame extends JFrame {
 	 */
 	private void layoutComponents() {
 		final int numPowerups = this.checkBoxes.size();
-		super.setSize(500, 125 * (numPowerups + 2)); // add one for the FPS option and one for the start button
+		super.setSize(500, 75 * (numPowerups + 2)); // add one for the FPS option and one for the start button
 		super.setLayout(new GridLayout(numPowerups + 2, 2)); // add one for the FPS option and one for the start button
 		super.add(this.selectFPSLabel);
 		super.add(this.fpsMenu);
