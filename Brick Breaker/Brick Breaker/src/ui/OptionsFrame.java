@@ -1,12 +1,18 @@
 package ui;
 
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import powerups.PowerupFactory;
 
 /**
  * This class is a singleton options menu for the brick breaker game, where the
@@ -28,6 +34,8 @@ public class OptionsFrame extends JFrame {
 	private final JLabel selectFPSLabel = new JLabel("Select FPS");
 	private final JComboBox<Integer> fpsMenu = new JComboBox<>(FPS_CHOICES);
 	private final JButton startButton = new JButton("Start");
+	private final List<JCheckBox> checkBoxes = new LinkedList<>();
+	private final List<String> enabledPowerups = new ArrayList<>();
 
 	/**
 	 * @return The singleton instance of OptionsFrame
@@ -42,14 +50,9 @@ public class OptionsFrame extends JFrame {
 
 	private OptionsFrame() {
 		super("Game Options");
-		super.setSize(500, 125);
-		super.setLayout(new GridLayout(2, 2));
 		this.initComponents();
+		this.layoutComponents();
 		this.addListeners();
-		super.add(this.selectFPSLabel);
-		super.add(this.fpsMenu);
-		super.add(new JPanel());
-		super.add(this.startButton);
 		super.setLocationRelativeTo(null);
 		super.setResizable(false);
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,20 +81,65 @@ public class OptionsFrame extends JFrame {
 	}
 
 	/**
+	 * @return A List of the names of the enabled powerups.
+	 */
+	public List<String> getEnabledPowerups() {
+		return this.enabledPowerups;
+	}
+
+	/**
 	 * Makes sure that all of the options are initally set to their defaults.
 	 */
 	private void initComponents() {
 		this.fpsMenu.setSelectedItem(MAX_FPS);
+
+		final String[] powerups = PowerupFactory.getPowerupNames();
+		for (final String powerup : powerups) {
+			this.checkBoxes.add(new JCheckBox(powerup, true));
+		}
 	}
 
 	/**
-	 * Adds functionality to the start button (set OptionsFrame to invisible, set
-	 * the game FPS, and make the game visible).
+	 * Lays out the initialized components.
+	 */
+	private void layoutComponents() {
+		final int numPowerups = this.checkBoxes.size();
+		super.setSize(500, 125 * (numPowerups + 2)); // add one for the FPS option and one for the start button
+		super.setLayout(new GridLayout(numPowerups + 2, 2)); // add one for the FPS option and one for the start button
+		super.add(this.selectFPSLabel);
+		super.add(this.fpsMenu);
+
+		for (final JCheckBox checkBox : this.checkBoxes) {
+			super.add(new JPanel());
+			super.add(checkBox);
+		}
+
+		super.add(new JPanel());
+		super.add(this.startButton);
+	}
+
+	/**
+	 * Adds functionality to the start button (set OptionsFrame to invisible, cache
+	 * the enabled powerups, and make the game visible).
 	 */
 	private void addListeners() {
 		this.startButton.addActionListener((e) -> {
 			super.setVisible(false);
+			this.setEnabledPowerups();
 			BrickBreakerFrame.getInstance().displayNewGame();
 		});
+	}
+
+	/**
+	 * Reads the list of checkboxes and caches the ones that are enabled.
+	 */
+	private void setEnabledPowerups() {
+		this.enabledPowerups.clear();
+
+		for (final JCheckBox checkBox : this.checkBoxes) {
+			if (checkBox.isSelected()) {
+				this.enabledPowerups.add(checkBox.getText());
+			}
+		}
 	}
 }
