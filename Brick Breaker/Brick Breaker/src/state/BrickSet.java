@@ -4,7 +4,9 @@ import java.awt.Graphics;
 import java.util.HashSet;
 
 import api.Drawable;
+import powerups.PowerupFactory;
 import ui.BrickBreakerPanel;
+import ui.OptionsFrame;
 
 /**
  * Extension of HashSet<Brick> that provides useful methods for dealing with the
@@ -39,5 +41,25 @@ public class BrickSet extends HashSet<Brick> implements Drawable {
 		for (final Brick brick : this) {
 			brick.draw(g);
 		}
+	}
+
+	/**
+	 * {@inheritDoc} Whenever a brick is removed, it has a 10% chance of creating a
+	 * powerup in its place.
+	 */
+	@Override
+	public boolean remove(final Object o) {
+		super.remove(o);
+
+		if (o instanceof Brick && Math.random() < 0.99) {
+			final Brick brick = (Brick) o;
+			final String[] powerups = OptionsFrame.getInstance().getEnabledPowerups();
+
+			BrickBreakerPanel.getInstance()
+					.addPowerup(PowerupFactory.createPowerup(powerups[(int) (Math.random() * powerups.length)],
+							brick.getX() + (Brick.BRICK_WIDTH / 2), brick.getY() + (Brick.BRICK_HEIGHT / 2)));
+		}
+
+		return true;
 	}
 }

@@ -81,10 +81,10 @@ public class OptionsFrame extends JFrame {
 	}
 
 	/**
-	 * @return A List of the names of the enabled powerups.
+	 * @return An array of the names of the enabled powerups.
 	 */
-	public List<String> getEnabledPowerups() {
-		return this.enabledPowerups;
+	public String[] getEnabledPowerups() {
+		return this.enabledPowerups.toArray(new String[this.enabledPowerups.size()]);
 	}
 
 	/**

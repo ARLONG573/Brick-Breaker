@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import api.Powerup;
 import state.BallSet;
 import state.Bar;
 import state.BrickSet;
@@ -49,9 +50,9 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		public void mouseClicked(final MouseEvent e) {
 			if (!BrickBreakerPanel.this.gameStarted) {
 				BrickBreakerPanel.this.gameStarted = true;
-				
+
 				final int clickX = e.getX();
-				
+
 				BrickBreakerPanel.this.ballSet.launchFirstBall(clickX, e.getY());
 
 				BrickBreakerPanel.this.bar.moveToMouse(clickX);
@@ -114,6 +115,18 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		this.initStateVariables();
 		this.initDrawableSet();
 		this.initUpdatableSet();
+	}
+
+	/**
+	 * Adds the given Powerup to the set of Powerups, as well as the set of
+	 * Drawables and Updatables (since Powerups are also instances of Drawable and
+	 * Updatable).
+	 * 
+	 * @param powerup
+	 *            The powerup to add
+	 */
+	public void addPowerup(final Powerup powerup) {
+		//TODO
 	}
 
 	/**
