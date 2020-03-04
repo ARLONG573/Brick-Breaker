@@ -95,10 +95,10 @@ public class Ball implements Drawable, Updatable {
 	 * Checks if the ball is in a position to bounce off the top of the bar; if it
 	 * is, negate its speed in the y direction.
 	 * 
-	 * The ball is in a position to bounce off of the top of the bar if its center
-	 * is between the left and right edge of the bar (horizontal requirement) and
-	 * the top edge of the bar is somewhere between the bottom and top of the ball.
-	 * the ball.
+	 * The ball is in a position to bounce off of the top of the bar if, next frame,
+	 * its center is between the left and right edge of the bar (horizontal
+	 * requirement) and the top edge of the bar is somewhere between the bottom and
+	 * top of the ball.
 	 * 
 	 * @param bar
 	 *            The bar to check for a collision with
@@ -106,9 +106,10 @@ public class Ball implements Drawable, Updatable {
 	void checkForBarCollision(final Bar bar) {
 		final int centerX = this.x + (BALL_WIDTH / 2);
 		final int barX = bar.getX();
+		final int nextY = this.y + this.dy;
 
 		final boolean xRequirement = this.valueLiesWithinRange(centerX, barX, barX + bar.getWidth());
-		final boolean yRequirement = this.valueLiesWithinRange(Bar.BAR_Y, this.y, this.y + BALL_HEIGHT);
+		final boolean yRequirement = this.valueLiesWithinRange(Bar.BAR_Y, nextY, nextY + BALL_HEIGHT);
 
 		if (xRequirement && yRequirement) {
 			this.setY(Bar.BAR_Y - BALL_HEIGHT);
@@ -129,6 +130,8 @@ public class Ball implements Drawable, Updatable {
 	boolean checkForBrickCollision(final Brick brick) {
 		final int centerX = this.x + (BALL_WIDTH / 2);
 		final int centerY = this.y + (BALL_HEIGHT / 2);
+		final int nextX = this.x + this.dx;
+		final int nextY = this.y + this.dy;
 
 		final int brickLeft = brick.getLeft();
 		final int brickTop = brick.getTop();
@@ -142,14 +145,14 @@ public class Ball implements Drawable, Updatable {
 		// check for collisions; note that a collision can occur on two sides at once
 		// bottom
 		xRequirement = this.valueLiesWithinRange(centerX, brickLeft, brickRight);
-		yRequirement = this.valueLiesWithinRange(brickBottom, this.y, this.y + BALL_HEIGHT);
+		yRequirement = this.valueLiesWithinRange(brickBottom, nextY, nextY + BALL_HEIGHT);
 		if (xRequirement && yRequirement) {
 			this.setY(brickBottom);
 			this.setDy(-this.dy);
 			hit = true;
 		}
 		// left
-		xRequirement = this.valueLiesWithinRange(brickLeft, this.x, this.x + BALL_WIDTH);
+		xRequirement = this.valueLiesWithinRange(brickLeft, nextX, nextX + BALL_WIDTH);
 		yRequirement = this.valueLiesWithinRange(centerY, brickTop, brickBottom);
 		if (xRequirement && yRequirement) {
 			this.setX(brickLeft - BALL_WIDTH);
@@ -157,7 +160,7 @@ public class Ball implements Drawable, Updatable {
 			hit = true;
 		}
 		// right
-		xRequirement = this.valueLiesWithinRange(brickRight, this.x, this.x + BALL_WIDTH);
+		xRequirement = this.valueLiesWithinRange(brickRight, nextX, nextX + BALL_WIDTH);
 		yRequirement = this.valueLiesWithinRange(centerY, brickTop, brickBottom);
 		if (xRequirement && yRequirement) {
 			this.setX(brickRight);
@@ -166,7 +169,7 @@ public class Ball implements Drawable, Updatable {
 		}
 		// top
 		xRequirement = this.valueLiesWithinRange(centerX, brickLeft, brickRight);
-		yRequirement = this.valueLiesWithinRange(brickTop, this.y, this.y + BALL_HEIGHT);
+		yRequirement = this.valueLiesWithinRange(brickTop, nextY, nextY + BALL_HEIGHT);
 		if (xRequirement && yRequirement) {
 			this.setY(brickTop - BALL_HEIGHT);
 			this.setDy(-this.dy);
