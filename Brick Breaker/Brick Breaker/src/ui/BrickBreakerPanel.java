@@ -115,6 +115,8 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	 */
 	public void initGameState() {
 		this.initStateVariables();
+
+		this.powerups.clear();
 		this.initDrawableSet();
 		this.initUpdatableSet();
 	}
