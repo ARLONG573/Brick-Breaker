@@ -39,6 +39,8 @@ public class PowerupSet extends HashSet<Powerup> implements Drawable, Updatable 
 		for (final Powerup powerup : this) {
 			powerup.update();
 		}
+
+		this.removeLostPowerups();
 	}
 
 	@Override
@@ -46,5 +48,20 @@ public class PowerupSet extends HashSet<Powerup> implements Drawable, Updatable 
 		for (final Powerup powerup : this) {
 			powerup.draw(g);
 		}
+	}
+
+	/**
+	 * Removes any Powerups that have gone off the bottom of the screen.
+	 */
+	private void removeLostPowerups() {
+		final PowerupSet lostPowerups = new PowerupSet();
+
+		for (final Powerup powerup : this) {
+			if (powerup.getY() > Ball.MAX_Y) {
+				lostPowerups.add(powerup);
+			}
+		}
+
+		super.removeAll(lostPowerups);
 	}
 }

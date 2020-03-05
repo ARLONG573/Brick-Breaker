@@ -24,4 +24,9 @@ public interface Powerup extends Drawable, Updatable {
 	 * @return True if this powerup collidied with the given bar, otherwise false
 	 */
 	public boolean checkForBarCollision(final Bar bar);
+
+	/**
+	 * @return The current y-coordinate of this Powerup.
+	 */
+	public int getY();
 }

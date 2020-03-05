@@ -47,6 +47,11 @@ public abstract class AbstractPowerup implements Powerup {
 	public abstract void activate();
 
 	@Override
+	public int getY() {
+		return this.y;
+	}
+
+	@Override
 	public void update() {
 		this.y += POWERUP_SPEED;
 	}

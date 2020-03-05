@@ -43,7 +43,7 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 		if (ball.isMoving()) {
 			return;
 		}
-		
+
 		ball.launchTowards(x, y);
 	}
 
@@ -115,6 +115,6 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 			}
 		}
 
-		this.removeAll(lostBalls);
+		super.removeAll(lostBalls);
 	}
 }
