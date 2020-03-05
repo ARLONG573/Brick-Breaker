@@ -55,9 +55,10 @@ public abstract class AbstractPowerup implements Powerup {
 	public boolean checkForBarCollision(final Bar bar) {
 		final int centerX = this.x + (POWERUP_WIDTH / 2);
 		final int barX = bar.getX();
+		final int nextY = this.y + POWERUP_SPEED;
 
 		final boolean xRequirement = this.valueLiesWithinRange(centerX, barX, barX + bar.getWidth());
-		final boolean yRequirement = this.valueLiesWithinRange(Bar.BAR_Y, this.y, this.y + POWERUP_HEIGHT);
+		final boolean yRequirement = this.valueLiesWithinRange(Bar.BAR_Y, nextY, nextY + POWERUP_HEIGHT);
 
 		if (xRequirement && yRequirement) {
 			this.activate();
