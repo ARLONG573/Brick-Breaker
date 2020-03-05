@@ -51,7 +51,7 @@ public class BrickSet extends HashSet<Brick> implements Drawable {
 	public boolean remove(final Object o) {
 		super.remove(o);
 
-		if (o instanceof Brick && Math.random() < 0.99) {
+		if (o instanceof Brick && Math.random() < 0.1) {
 			final Brick brick = (Brick) o;
 			final String[] powerups = OptionsFrame.getInstance().getEnabledPowerups();
 

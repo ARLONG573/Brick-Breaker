@@ -19,6 +19,7 @@ import state.BallSet;
 import state.Bar;
 import state.BrickSet;
 import state.DrawableSet;
+import state.PowerupSet;
 import state.UpdatableSet;
 
 /**
@@ -43,6 +44,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 
 	private final DrawableSet drawables = new DrawableSet();
 	private final UpdatableSet updatables = new UpdatableSet();
+	private final PowerupSet powerups = new PowerupSet();
 
 	// If the user clicks and the game hasn't started, start the game
 	private final MouseAdapter clickListener = new MouseAdapter() {
@@ -118,15 +120,14 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * Adds the given Powerup to the set of Powerups, as well as the set of
-	 * Drawables and Updatables (since Powerups are also instances of Drawable and
-	 * Updatable).
+	 * Adds the given Powerup to the set of Powerups. Note that this automatically
+	 * adds them to the set of Drawables and Updatables as well.
 	 * 
 	 * @param powerup
 	 *            The powerup to add
 	 */
 	public void addPowerup(final Powerup powerup) {
-		//TODO
+		this.powerups.add(powerup);
 	}
 
 	/**
@@ -148,6 +149,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		this.drawables.add(this.bar);
 		this.drawables.add(this.brickSet);
 		this.drawables.add(this.ballSet);
+		this.drawables.add(this.powerups);
 	}
 
 	/**
@@ -156,6 +158,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	private void initUpdatableSet() {
 		this.updatables.clear();
 		this.updatables.add(this.ballSet);
+		this.updatables.add(this.powerups);
 	}
 
 	/**
@@ -186,6 +189,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		}
 
 		// the game is not over, check for anything that might change an object's state
+		this.powerups.checkForBarCollisions(this.bar);
 		this.ballSet.checkForBarCollisions(this.bar);
 		this.ballSet.checkForBrickCollisions(this.brickSet);
 	}

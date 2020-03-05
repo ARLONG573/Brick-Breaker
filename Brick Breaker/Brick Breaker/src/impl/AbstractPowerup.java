@@ -52,7 +52,7 @@ public abstract class AbstractPowerup implements Powerup {
 	}
 
 	@Override
-	public void checkForBarCollision(final Bar bar) {
+	public boolean checkForBarCollision(final Bar bar) {
 		final int centerX = this.x + (POWERUP_WIDTH / 2);
 		final int barX = bar.getX();
 
@@ -61,7 +61,10 @@ public abstract class AbstractPowerup implements Powerup {
 
 		if (xRequirement && yRequirement) {
 			this.activate();
+			return true;
 		}
+
+		return false;
 	}
 
 	/**

@@ -21,6 +21,7 @@ public interface Powerup extends Drawable, Updatable {
 	 * into a bar (typically the behavior is to call activate()).
 	 * 
 	 * @param bar
+	 * @return True if this powerup collidied with the given bar, otherwise false
 	 */
-	public void checkForBarCollision(final Bar bar);
+	public boolean checkForBarCollision(final Bar bar);
 }
