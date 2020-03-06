@@ -1,5 +1,6 @@
 package powerups;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import impl.AbstractPowerup;
@@ -23,7 +24,30 @@ public class ShrinkBarPowerup extends AbstractPowerup {
 
 	@Override
 	public void draw(final Graphics g) {
-		// TODO Auto-generated method stub
+		// the bar
+		g.setColor(Color.BLACK);
+		g.fillRect(super.x + (POWERUP_WIDTH / 3), super.y + (POWERUP_HEIGHT * 3 / 8), POWERUP_WIDTH / 3,
+				POWERUP_HEIGHT / 4);
+
+		// the arrows
+		g.setColor(Color.RED);
+
+		// left arrow
+		g.drawLine(super.x, super.y + (POWERUP_HEIGHT / 2), super.x + (POWERUP_WIDTH / 3),
+				super.y + (POWERUP_HEIGHT / 2));
+		g.drawLine(super.x + (POWERUP_HEIGHT / 6), super.y + (POWERUP_HEIGHT * 3 / 8), super.x + (POWERUP_WIDTH / 3),
+				super.y + (POWERUP_HEIGHT / 2));
+		g.drawLine(super.x + (POWERUP_HEIGHT / 6), super.y + (POWERUP_HEIGHT * 5 / 8), super.x + (POWERUP_WIDTH / 3),
+				super.y + (POWERUP_HEIGHT / 2));
+
+		// right arrow
+		g.drawLine(super.x + (POWERUP_WIDTH * 2 / 3), super.y + (POWERUP_HEIGHT / 2), super.x + POWERUP_WIDTH,
+				super.y + (POWERUP_HEIGHT / 2));
+		g.drawLine(super.x + (POWERUP_WIDTH * 2 / 3), super.y + (POWERUP_HEIGHT / 2), super.x + (POWERUP_WIDTH * 5 / 6),
+				super.y + (POWERUP_HEIGHT * 3 / 8));
+		g.drawLine(super.x + (POWERUP_WIDTH * 2 / 3), super.y + (POWERUP_HEIGHT / 2), super.x + (POWERUP_WIDTH * 5 / 6),
+				super.y + (POWERUP_HEIGHT * 5 / 8));
+
 	}
 
 	/**

@@ -51,13 +51,15 @@ public class BrickSet extends HashSet<Brick> implements Drawable {
 	public boolean remove(final Object o) {
 		super.remove(o);
 
-		if (o instanceof Brick && Math.random() < 0.1) {
+		if (o instanceof Brick && Math.random() < 0.9) {
 			final Brick brick = (Brick) o;
 			final String[] powerups = OptionsFrame.getInstance().getEnabledPowerups();
 
-			BrickBreakerPanel.getInstance()
-					.addPowerup(PowerupFactory.createPowerup(powerups[(int) (Math.random() * powerups.length)],
-							brick.getX() + (Brick.BRICK_WIDTH / 2), brick.getY() + (Brick.BRICK_HEIGHT / 2)));
+			if (powerups.length > 0) {
+				BrickBreakerPanel.getInstance()
+						.addPowerup(PowerupFactory.createPowerup(powerups[(int) (Math.random() * powerups.length)],
+								brick.getX() + (Brick.BRICK_WIDTH / 2), brick.getY() + (Brick.BRICK_HEIGHT / 2)));
+			}
 		}
 
 		return true;

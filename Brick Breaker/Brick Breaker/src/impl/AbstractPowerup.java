@@ -17,13 +17,13 @@ import ui.OptionsFrame;
  */
 public abstract class AbstractPowerup implements Powerup {
 
-	private static final int POWERUP_WIDTH = Ball.BALL_WIDTH;
-	private static final int POWERUP_HEIGHT = Ball.BALL_HEIGHT;
+	protected static final int POWERUP_WIDTH = Ball.BALL_WIDTH * 2;
+	protected static final int POWERUP_HEIGHT = Ball.BALL_HEIGHT * 2;
 
-	private static final int POWERUP_SPEED = Ball.DEFAULT_SPEED * OptionsFrame.getInstance().getSpeedCoefficient();
+	protected int x;
+	protected int y;
 
-	private int x;
-	private int y;
+	private static final int POWERUP_SPEED = OptionsFrame.getInstance().getSpeedCoefficient() * Ball.DEFAULT_SPEED / 2;
 
 	protected AbstractPowerup() {
 		// left empty because never used, but must exist for compilation
