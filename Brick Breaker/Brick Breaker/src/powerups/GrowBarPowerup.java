@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import impl.AbstractPowerup;
 
 /**
- * Powerup that, upon activation, widens the bar by 10%
+ * Powerup that, upon activation, widens the bar by 20%
  * 
  * @author Aaron Tetens
  */
@@ -27,7 +27,7 @@ public class GrowBarPowerup extends AbstractPowerup {
 	}
 
 	/**
-	 * {@inheritDoc} Upon activation, this powerup widens the bar by 10%
+	 * {@inheritDoc} Upon activation, this powerup widens the bar by 20%
 	 */
 	@Override
 	public void activate() {

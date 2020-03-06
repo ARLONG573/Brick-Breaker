@@ -18,7 +18,7 @@ public class Bar implements Drawable {
 	// The bar only moves and changes size in the horizontal dirction, so these
 	// variables are final.
 	public static final int BAR_Y = BrickBreakerPanel.BOTTOM_WALL - ((int) (1.5 * Brick.BRICK_HEIGHT));
-	
+
 	static final int BAR_HEIGHT = Brick.BRICK_HEIGHT / 2;
 
 	private static final int INIT_WIDTH = (int) (1.25 * Brick.BRICK_WIDTH);
@@ -87,6 +87,14 @@ public class Bar implements Drawable {
 
 	public int getWidth() {
 		return this.width;
+	}
+
+	/**
+	 * Shrinks the bar by 20% while maintaining the coordinates of its center.
+	 */
+	public void shrink() {
+		this.x += (this.width * .1);
+		this.width *= .8;
 	}
 
 	@Override

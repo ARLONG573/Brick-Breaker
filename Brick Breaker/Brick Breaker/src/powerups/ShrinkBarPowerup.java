@@ -4,9 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import impl.AbstractPowerup;
+import state.Bar;
 
 /**
- * Powerup that, upon activation, shrinks the bar by 10%
+ * Powerup that, upon activation, shrinks the bar by 20%
  * 
  * @author Aaron Tetens
  */
@@ -51,10 +52,10 @@ public class ShrinkBarPowerup extends AbstractPowerup {
 	}
 
 	/**
-	 * {@inheritDoc} Upon activation, this powerup shrinks the bar by 10%
+	 * {@inheritDoc} Upon activation, this powerup shrinks the bar by 20%
 	 */
 	@Override
 	public void activate() {
-		// TODO Auto-generated method stub
+		Bar.getInstance().shrink();
 	}
 }
