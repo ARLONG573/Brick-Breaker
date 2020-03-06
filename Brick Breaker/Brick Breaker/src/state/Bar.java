@@ -97,6 +97,21 @@ public class Bar implements Drawable {
 		this.width *= .8;
 	}
 
+	/**
+	 * Grows the bar by 20% while maintaining the coordinates of its center, if
+	 * possible.
+	 */
+	public void grow() {
+		this.x -= (this.width * .1);
+		this.width *= 1.2;
+
+		if (this.x < BrickBreakerPanel.LEFT_WALL) {
+			this.x = BrickBreakerPanel.LEFT_WALL;
+		} else if (this.x + this.width > BrickBreakerPanel.RIGHT_WALL) {
+			this.x = BrickBreakerPanel.RIGHT_WALL - this.width;
+		}
+	}
+
 	@Override
 	public void draw(final Graphics g) {
 		g.setColor(Color.BLACK);
