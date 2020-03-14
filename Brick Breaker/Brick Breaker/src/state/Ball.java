@@ -271,8 +271,13 @@ public class Ball implements Drawable, Updatable {
 		final int xSign = this.dx < 0 ? -1 : 1;
 		final int ySign = this.dy < 0 ? -1 : 1;
 
-		this.dx = (int) (xSign * Math.sqrt((newSpeed * newSpeed) / (1 + (tanTheta * tanTheta))));
-		this.dy = (int) (ySign * Math.abs(this.dx) * tanTheta);
+		final int newDx = (int) (xSign * Math.sqrt((newSpeed * newSpeed) / (1 + (tanTheta * tanTheta))));
+		final int newDy = (int) (ySign * Math.abs(newDx) * tanTheta);
+
+		if (Math.abs(newDx) > 0 && Math.abs(newDy) > 0) {
+			this.dx = newDx;
+			this.dy = newDy;
+		}
 	}
 
 	public int getDx() {
