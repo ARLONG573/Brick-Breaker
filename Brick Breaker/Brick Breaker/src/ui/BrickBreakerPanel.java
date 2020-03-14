@@ -14,10 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import api.Powerup;
 import state.BallSet;
 import state.Bar;
 import state.BrickSet;
 import state.DrawableSet;
+import state.PowerupSet;
 import state.UpdatableSet;
 
 /**
@@ -42,6 +44,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 
 	private final DrawableSet drawables = new DrawableSet();
 	private final UpdatableSet updatables = new UpdatableSet();
+	private final PowerupSet powerups = new PowerupSet();
 
 	// If the user clicks and the game hasn't started, start the game
 	private final MouseAdapter clickListener = new MouseAdapter() {
@@ -49,12 +52,10 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		public void mouseClicked(final MouseEvent e) {
 			if (!BrickBreakerPanel.this.gameStarted) {
 				BrickBreakerPanel.this.gameStarted = true;
-				
+
 				final int clickX = e.getX();
-				
-				// speed needs to be adjusted based on the fps
-				final int speedCoeff = OptionsFrame.MAX_FPS / BrickBreakerPanel.this.fps;
-				BrickBreakerPanel.this.ballSet.launchFirstBall(clickX, e.getY(), speedCoeff);
+
+				BrickBreakerPanel.this.ballSet.launchFirstBall(clickX, e.getY());
 
 				BrickBreakerPanel.this.bar.moveToMouse(clickX);
 				BrickBreakerPanel.this.initTimer();
@@ -114,8 +115,21 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	 */
 	public void initGameState() {
 		this.initStateVariables();
+
+		this.powerups.clear();
 		this.initDrawableSet();
 		this.initUpdatableSet();
+	}
+
+	/**
+	 * Adds the given Powerup to the set of Powerups. Note that this automatically
+	 * adds them to the set of Drawables and Updatables as well.
+	 * 
+	 * @param powerup
+	 *            The powerup to add
+	 */
+	public void addPowerup(final Powerup powerup) {
+		this.powerups.add(powerup);
 	}
 
 	/**
@@ -137,6 +151,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		this.drawables.add(this.bar);
 		this.drawables.add(this.brickSet);
 		this.drawables.add(this.ballSet);
+		this.drawables.add(this.powerups);
 	}
 
 	/**
@@ -145,6 +160,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	private void initUpdatableSet() {
 		this.updatables.clear();
 		this.updatables.add(this.ballSet);
+		this.updatables.add(this.powerups);
 	}
 
 	/**
@@ -175,6 +191,7 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		}
 
 		// the game is not over, check for anything that might change an object's state
+		this.powerups.checkForBarCollisions(this.bar);
 		this.ballSet.checkForBarCollisions(this.bar);
 		this.ballSet.checkForBrickCollisions(this.brickSet);
 	}
@@ -219,5 +236,27 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 		final int textHeight = metrics.getAscent();
 
 		g.drawString(START_GAME_TEXT, MID_X - (textWidth / 2), MID_Y - (textHeight / 2));
+	}
+
+	/**
+	 * Speeds up all balls by 10%
+	 */
+	public void speedUpBalls() {
+		this.ballSet.speedUp();
+	}
+
+	/**
+	 * Slows down all balls by 10%
+	 */
+	public void slowDownBalls() {
+		this.ballSet.speedDown();
+	}
+
+	/**
+	 * From each ball, spawn 2 additional balls with same speed but random
+	 * directions.
+	 */
+	public void spawnBalls() {
+		this.ballSet.spawnBalls();
 	}
 }

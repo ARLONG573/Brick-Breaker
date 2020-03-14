@@ -32,10 +32,8 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 	 * 
 	 * @param x
 	 * @param y
-	 * @param speedCoeff
-	 *            When setting the speed, dx and dy are multiplied by this number.
 	 */
-	public void launchFirstBall(final int x, final int y, final int speedCoeff) {
+	public void launchFirstBall(final int x, final int y) {
 		if (this.size() != 1) {
 			return;
 		}
@@ -45,8 +43,8 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 		if (ball.isMoving()) {
 			return;
 		}
-		
-		ball.launchTowards(x, y, speedCoeff);
+
+		ball.launchTowards(x, y);
 	}
 
 	@Override
@@ -117,6 +115,44 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 			}
 		}
 
-		this.removeAll(lostBalls);
+		super.removeAll(lostBalls);
+	}
+
+	/**
+	 * Speeds up all Balls in the set by 10%
+	 */
+	public void speedUp() {
+		for (final Ball ball : this) {
+			ball.speedUp();
+		}
+	}
+
+	/**
+	 * Slows down all Balls in the set by 10%
+	 */
+	public void speedDown() {
+		for (final Ball ball : this) {
+			ball.speedDown();
+		}
+	}
+
+	/**
+	 * For each ball in this set, spawn 2 more balls at the same speed in random
+	 * directions.
+	 */
+	public void spawnBalls() {
+		final Set<Ball> newBalls = new HashSet<>();
+
+		for (final Ball ball : this) {
+			final double speed = Math.sqrt(Math.pow(ball.getDx(), 2) + Math.pow(ball.getDy(), 2));
+
+			for (int i = 1; i <= 2; i++) {
+				final double theta = Math.toRadians((int) (Math.random() * 361));
+				newBalls.add(new Ball(ball.getX(), ball.getY(), (int) (speed * Math.cos(theta)),
+						(int) (speed * Math.sin(theta))));
+			}
+		}
+
+		super.addAll(newBalls);
 	}
 }
