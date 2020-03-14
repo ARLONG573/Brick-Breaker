@@ -1,5 +1,6 @@
 package powerups;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import impl.AbstractPowerup;
@@ -23,7 +24,12 @@ public class MultiBallPowerup extends AbstractPowerup {
 
 	@Override
 	public void draw(final Graphics g) {
-		// TODO Auto-generated method stub
+		g.setColor(Color.RED);
+
+		g.fillOval(super.x + POWERUP_WIDTH / 3, super.y, POWERUP_WIDTH / 3, POWERUP_HEIGHT / 3);
+		g.fillOval(super.x, super.y + (POWERUP_HEIGHT * 2) / 3, POWERUP_WIDTH / 3, POWERUP_HEIGHT / 3);
+		g.fillOval(super.x + (POWERUP_WIDTH * 2) / 3, super.y + (POWERUP_HEIGHT * 2) / 3, POWERUP_WIDTH / 3,
+				POWERUP_HEIGHT / 3);
 	}
 
 	/**
