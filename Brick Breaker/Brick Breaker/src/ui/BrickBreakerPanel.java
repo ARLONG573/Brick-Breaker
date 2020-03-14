@@ -251,4 +251,12 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	public void slowDownBalls() {
 		this.ballSet.speedDown();
 	}
+
+	/**
+	 * From each ball, spawn 2 additional balls with same speed but random
+	 * directions.
+	 */
+	public void spawnBalls() {
+		this.ballSet.spawnBalls();
+	}
 }

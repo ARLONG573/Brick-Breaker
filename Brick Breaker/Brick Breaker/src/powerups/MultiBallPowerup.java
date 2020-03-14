@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import impl.AbstractPowerup;
+import ui.BrickBreakerPanel;
 
 /**
  * Powerup that, upon activation, spawns 2 more balls from every ball.
@@ -39,6 +40,6 @@ public class MultiBallPowerup extends AbstractPowerup {
 	 */
 	@Override
 	public void activate() {
-		// TODO Auto-generated method stub
+		BrickBreakerPanel.getInstance().spawnBalls();
 	}
 }

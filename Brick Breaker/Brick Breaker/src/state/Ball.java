@@ -267,4 +267,16 @@ public class Ball implements Drawable, Updatable {
 		this.dx *= mult;
 		this.dy *= mult;
 	}
+
+	public int getDx() {
+		return this.dx;
+	}
+
+	public int getDy() {
+		return this.dy;
+	}
+
+	public int getX() {
+		return this.x;
+	}
 }

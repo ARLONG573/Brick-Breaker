@@ -135,4 +135,24 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 			ball.speedDown();
 		}
 	}
+
+	/**
+	 * For each ball in this set, spawn 2 more balls at the same speed in random
+	 * directions.
+	 */
+	public void spawnBalls() {
+		final Set<Ball> newBalls = new HashSet<>();
+
+		for (final Ball ball : this) {
+			final double speed = Math.sqrt(Math.pow(ball.getDx(), 2) + Math.pow(ball.getDy(), 2));
+
+			for (int i = 1; i <= 2; i++) {
+				final double theta = Math.toRadians((int) (Math.random() * 361));
+				newBalls.add(new Ball(ball.getX(), ball.getY(), (int) (speed * Math.cos(theta)),
+						(int) (speed * Math.sin(theta))));
+			}
+		}
+
+		super.addAll(newBalls);
+	}
 }
