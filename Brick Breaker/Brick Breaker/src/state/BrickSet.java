@@ -44,14 +44,14 @@ public class BrickSet extends HashSet<Brick> implements Drawable {
 	}
 
 	/**
-	 * {@inheritDoc} Whenever a brick is removed, it has a 10% chance of creating a
+	 * {@inheritDoc} Whenever a brick is removed, it has a 20% chance of creating a
 	 * powerup in its place.
 	 */
 	@Override
 	public boolean remove(final Object o) {
 		super.remove(o);
 
-		if (o instanceof Brick && Math.random() < 0.9) {
+		if (o instanceof Brick && Math.random() < 0.2) {
 			final Brick brick = (Brick) o;
 			final String[] powerups = OptionsFrame.getInstance().getEnabledPowerups();
 

@@ -119,7 +119,7 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 	}
 
 	/**
-	 * Speeds up all Balls in the set by about 20%
+	 * Speeds up all Balls in the set by 10%
 	 */
 	public void speedUp() {
 		for (final Ball ball : this) {
@@ -128,7 +128,7 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 	}
 
 	/**
-	 * Slows down all Balls in the set by about 20%
+	 * Slows down all Balls in the set by 10%
 	 */
 	public void speedDown() {
 		for (final Ball ball : this) {

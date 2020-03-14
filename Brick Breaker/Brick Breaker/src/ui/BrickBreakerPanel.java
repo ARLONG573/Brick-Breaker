@@ -239,14 +239,14 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * Speeds up all balls by about 20%
+	 * Speeds up all balls by 10%
 	 */
 	public void speedUpBalls() {
 		this.ballSet.speedUp();
 	}
 
 	/**
-	 * Slows down all balls by about 20%
+	 * Slows down all balls by 10%
 	 */
 	public void slowDownBalls() {
 		this.ballSet.speedDown();

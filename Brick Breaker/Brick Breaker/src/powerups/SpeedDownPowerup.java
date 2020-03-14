@@ -7,7 +7,7 @@ import impl.AbstractPowerup;
 import ui.BrickBreakerPanel;
 
 /**
- * Powerup that, upon activation, slows down each ball by about 20%
+ * Powerup that, upon activation, slows down each ball by 10%
  * 
  * @author Aaron Tetens
  */
@@ -40,7 +40,7 @@ public class SpeedDownPowerup extends AbstractPowerup {
 	}
 
 	/**
-	 * {@inheritDoc} Upon activation, this powerup slows down each ball by about 20%
+	 * {@inheritDoc} Upon activation, this powerup slows down each ball by 10%
 	 */
 	@Override
 	public void activate() {

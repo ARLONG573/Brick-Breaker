@@ -243,29 +243,36 @@ public class Ball implements Drawable, Updatable {
 	}
 
 	/**
-	 * Speeds the ball up by about 20%
+	 * Speeds the ball up by 10%
 	 */
 	public void speedUp() {
-		this.multiplySpeed(1.2);
+		this.multiplySpeed(1.1);
 	}
 
 	/**
-	 * Slows the ball down by about 20%
+	 * Slows the ball down by 10%
 	 */
 	public void speedDown() {
-		this.multiplySpeed(0.8);
+		this.multiplySpeed(0.9);
 	}
 
 	/**
-	 * Multiplies EACH of dx and dy by the given number...note that the total speed
-	 * will increase by a factor slightly more than mult.
+	 * Adjusts dx and dy such that the total speed is multiplied by the given value.
 	 * 
 	 * @param mult
-	 *            The factor by which to increase the speeds
+	 *            The factor by which to increase the speed
 	 */
 	private void multiplySpeed(final double mult) {
-		this.dx *= mult;
-		this.dy *= mult;
+		final double tanTheta = Math.abs((double) (this.dy) / this.dx);
+		final double currentSpeed = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+		final double newSpeed = currentSpeed * mult;
+
+		// avoid accidentally changing directions due to trig calculations
+		final int xSign = this.dx < 0 ? -1 : 1;
+		final int ySign = this.dy < 0 ? -1 : 1;
+
+		this.dx = (int) (xSign * Math.sqrt((newSpeed * newSpeed) / (1 + (tanTheta * tanTheta))));
+		this.dy = (int) (ySign * Math.abs(this.dx) * tanTheta);
 	}
 
 	public int getDx() {
