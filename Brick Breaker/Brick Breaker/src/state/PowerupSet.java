@@ -27,11 +27,15 @@ public class PowerupSet extends HashSet<Powerup> implements Drawable, Updatable 
 	 *            The bar to check for collisions with
 	 */
 	public void checkForBarCollisions(final Bar bar) {
+		final PowerupSet collidedPowerups = new PowerupSet();
+
 		for (final Powerup powerup : this) {
 			if (powerup.checkForBarCollision(bar)) {
-				super.remove(powerup);
+				collidedPowerups.add(powerup);
 			}
 		}
+
+		super.removeAll(collidedPowerups);
 	}
 
 	@Override

@@ -117,4 +117,22 @@ public class BallSet extends HashSet<Ball> implements Drawable, Updatable {
 
 		super.removeAll(lostBalls);
 	}
+
+	/**
+	 * Speeds up all Balls in the set by about 20%
+	 */
+	public void speedUp() {
+		for (final Ball ball : this) {
+			ball.speedUp();
+		}
+	}
+
+	/**
+	 * Slows down all Balls in the set by about 20%
+	 */
+	public void speedDown() {
+		for (final Ball ball : this) {
+			ball.speedDown();
+		}
+	}
 }

@@ -39,7 +39,7 @@ public class PowerupFactory {
 		case "Multi-Ball":
 			return new MultiBallPowerup(x, y);
 		case "Speed Up":
-			return new SpeedupPowerup(x, y);
+			return new SpeedUpPowerup(x, y);
 		case "Speed Down":
 			return new SpeedDownPowerup(x, y);
 		case "Grow Bar":

@@ -1,11 +1,13 @@
 package powerups;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import impl.AbstractPowerup;
+import ui.BrickBreakerPanel;
 
 /**
- * Powerup that, upon activation, slows down each ball by 10%
+ * Powerup that, upon activation, slows down each ball by about 20%
  * 
  * @author Aaron Tetens
  */
@@ -23,14 +25,25 @@ public class SpeedDownPowerup extends AbstractPowerup {
 
 	@Override
 	public void draw(final Graphics g) {
-		// TODO Auto-generated method stub
+		g.setColor(Color.GREEN);
+
+		// arrow
+		g.drawLine(super.x + (POWERUP_WIDTH / 3), super.y + (POWERUP_HEIGHT / 2), super.x + POWERUP_WIDTH,
+				super.y + (POWERUP_HEIGHT / 2));
+		g.drawLine(super.x + (POWERUP_WIDTH / 3), super.y + (POWERUP_HEIGHT / 2), super.x + (POWERUP_WIDTH * 2) / 3,
+				super.y + (POWERUP_HEIGHT / 3));
+		g.drawLine(super.x + (POWERUP_WIDTH / 3), super.y + (POWERUP_HEIGHT / 2), super.x + (POWERUP_WIDTH * 2) / 3,
+				super.y + (POWERUP_HEIGHT * 2) / 3);
+		// ball
+		g.setColor(Color.RED);
+		g.fillOval(super.x, super.y + POWERUP_HEIGHT / 3, POWERUP_WIDTH / 3, POWERUP_HEIGHT / 3);
 	}
 
 	/**
-	 * {@inheritDoc} Upon activation, this powerup slows down each ball by 10%
+	 * {@inheritDoc} Upon activation, this powerup slows down each ball by about 20%
 	 */
 	@Override
 	public void activate() {
-		// TODO Auto-generated method stub
+		BrickBreakerPanel.getInstance().slowDownBalls();
 	}
 }

@@ -241,4 +241,30 @@ public class Ball implements Drawable, Updatable {
 	boolean isMoving() {
 		return !(this.dx == 0 && this.dy == 0);
 	}
+
+	/**
+	 * Speeds the ball up by about 20%
+	 */
+	public void speedUp() {
+		this.multiplySpeed(1.2);
+	}
+
+	/**
+	 * Slows the ball down by about 20%
+	 */
+	public void speedDown() {
+		this.multiplySpeed(0.8);
+	}
+
+	/**
+	 * Multiplies EACH of dx and dy by the given number...note that the total speed
+	 * will increase by a factor slightly more than mult.
+	 * 
+	 * @param mult
+	 *            The factor by which to increase the speeds
+	 */
+	private void multiplySpeed(final double mult) {
+		this.dx *= mult;
+		this.dy *= mult;
+	}
 }

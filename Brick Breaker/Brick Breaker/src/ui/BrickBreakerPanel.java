@@ -237,4 +237,18 @@ public class BrickBreakerPanel extends JPanel implements ActionListener {
 
 		g.drawString(START_GAME_TEXT, MID_X - (textWidth / 2), MID_Y - (textHeight / 2));
 	}
+
+	/**
+	 * Speeds up all balls by about 20%
+	 */
+	public void speedUpBalls() {
+		this.ballSet.speedUp();
+	}
+
+	/**
+	 * Slows down all balls by about 20%
+	 */
+	public void slowDownBalls() {
+		this.ballSet.speedDown();
+	}
 }
